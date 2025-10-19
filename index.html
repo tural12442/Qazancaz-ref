@@ -47,9 +47,7 @@ p {color: #e0e7ff;}
   cursor: pointer;
   transition: 0.3s;
 }
-.ref-link:hover {
-  background: rgba(255,255,255,0.25);
-}
+.ref-link:hover { background: rgba(255,255,255,0.25); }
 button {
   margin-top: 15px;
   padding: 10px 20px;
@@ -61,9 +59,7 @@ button {
   cursor: pointer;
   transition: 0.3s;
 }
-button:hover {
-  transform: scale(1.05);
-}
+button:hover { transform: scale(1.05); }
 </style>
 </head>
 <body>
@@ -80,7 +76,7 @@ button:hover {
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
 
-// 🔥 Sənin Firebase konfiqurasiyan
+// 🔥 Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyD0dnb927FbT2LjZf06hxB6lBX2JaBdevc",
   authDomain: "qazanc-az-64da7.firebaseapp.com",
@@ -90,36 +86,42 @@ const firebaseConfig = {
   appId: "1:1069574349445:web:b815928eca716f89617fec",
   measurementId: "G-Y5ZHFYLGMC"
 };
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 🧩 Telegram UID alırıq və sabit saxlayırıq
+// 🧠 Telegram məlumatlarını al
 const tg = window.Telegram?.WebApp;
 tg?.expand();
 
-let userId;
-let userName;
+let userId = localStorage.getItem("userId");
+let userName = "İstifadəçi";
+let invitedBy = "";
 
+// Telegramdan gələn UID və start_param
 try {
   const user = tg?.initDataUnsafe?.user;
   if (user?.id) {
     userId = user.id.toString();
     userName = user.first_name;
     localStorage.setItem("userId", userId);
-  } else {
-    // Əgər Telegram məlumatı yoxdursa, localStorage-dan götür
-    userId = localStorage.getItem("userId") || Math.floor(Math.random()*1000000).toString();
-    localStorage.setItem("userId", userId);
   }
-} catch {
-  userId = localStorage.getItem("userId") || Math.floor(Math.random()*1000000).toString();
+  if (tg?.initDataUnsafe?.start_param) {
+    invitedBy = tg.initDataUnsafe.start_param;
+    localStorage.setItem("invitedBy", invitedBy);
+  }
+} catch(e) {
+  console.log("Telegram məlumatı tapılmadı:", e);
+}
+
+// Əgər localStorage-da varsa, ordan götür
+invitedBy = invitedBy || localStorage.getItem("invitedBy") || "";
+
+if (!userId) {
+  userId = Math.floor(Math.random() * 1000000000).toString();
   localStorage.setItem("userId", userId);
 }
 
-const invitedBy = tg?.initDataUnsafe?.start_param || "";
 const refLink = `https://t.me/reklampaybot?startapp=${userId}`;
-
 const refEl = document.getElementById("refLink");
 refEl.textContent = refLink;
 refEl.onclick = () => {
@@ -127,20 +129,30 @@ refEl.onclick = () => {
   alert("📋 Referans linkiniz kopyalandı!");
 };
 
-// 🧠 Firebasedə istifadəçini yoxla və əlavə et
-async function initUser(){
-  const userRef = doc(db,"users",userId);
+// 🧩 Firebasedə qeydiyyat və bonus
+async function initUser() {
+  const userRef = doc(db, "users", userId);
   const snap = await getDoc(userRef);
-  if(!snap.exists()){
-    await setDoc(userRef,{balance:0,referral_count:0,invited_by:invitedBy});
-    if(invitedBy){
-      const inviterRef = doc(db,"users",invitedBy);
-      await updateDoc(inviterRef,{
+
+  // Yeni istifadəçi əlavə et
+  if (!snap.exists()) {
+    await setDoc(userRef, {
+      balance: 0,
+      referral_count: 0,
+      invited_by: invitedBy
+    });
+
+    // Əgər bu istifadəçi kiminsə linkindən gəlibsə
+    if (invitedBy && invitedBy !== userId) {
+      const inviterRef = doc(db, "users", invitedBy);
+      await updateDoc(inviterRef, {
         referral_count: increment(1),
         balance: increment(0.1)
-      }).catch(()=>{});
+      }).catch(() => {});
     }
   }
+
+  // Məlumatı göstər
   const userData = (await getDoc(userRef)).data();
   document.getElementById("balance").textContent = `${userData.balance.toFixed(4)} ₼`;
   document.getElementById("refCount").textContent = userData.referral_count;
@@ -148,6 +160,5 @@ async function initUser(){
 
 initUser();
 </script>
-
 </body>
 </html>
