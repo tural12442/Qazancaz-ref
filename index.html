@@ -31,148 +31,38 @@ body{
 .page{display:none;animation:fadeIn .4s ease;}
 .page.active{display:block;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-.balance-card{
-  background:var(--glass);
-  border-radius:20px;padding:22px;
-  margin-bottom:40px;
-  box-shadow:0 4px 25px rgba(0,0,0,.4);
-  backdrop-filter:blur(10px);
-  text-align:center;
-  border:1px solid rgba(255,255,255,0.15);
-}
+.balance-card{background:var(--glass);border-radius:20px;padding:22px;margin-bottom:40px;box-shadow:0 4px 25px rgba(0,0,0,.4);backdrop-filter:blur(10px);text-align:center;border:1px solid rgba(255,255,255,0.15);}
 .balance-card h3{font-size:15px;color:#c7d2fe;}
 .balance-card .amount{font-size:34px;font-weight:700;margin-top:5px;}
 .balance-card .usd{font-size:15px;color:#86efac;margin-top:4px;}
-
-.ad-card,.task-card{
-  background:var(--glass);
-  border-radius:20px;
-  padding:26px;
-  text-align:center;
-  box-shadow:0 6px 28px rgba(0,0,0,.4);
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,0.15);
-}
-.ad-card h2,.task-card h2{
-  font-size:22px;
-  color:#f0f9ff;
-  text-shadow:0 0 6px rgba(255,255,255,0.4);
-}
-.ad-card p{margin:6px 0;color:#e2e8f0;font-size:15px;}
-.stats{display:flex;justify-content:space-around;margin-top:16px;}
-.stat{background:rgba(255,255,255,.1);border-radius:12px;padding:10px 20px;}
-.stat span{display:block;font-size:19px;font-weight:700;}
-.stat label{font-size:13px;color:#cbd5e1;}
-.progress{height:8px;background:rgba(255,255,255,0.2);border-radius:6px;overflow:hidden;margin-top:16px;}
-.progress-fill{height:100%;background:#22d3ee;width:0%;transition:width .4s;}
-.ad-btn,.task-card button,.form button,.method{
-  width:100%;
-  margin-top:18px;
-  padding:15px;
-  font-size:17px;
-  font-weight:700;
-  border:none;
-  border-radius:14px;
-  color:#fff;
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
-  transition:0.3s;
-  background:linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899);
-  background-size:300% 300%;
-  animation:glowMove 6s infinite alternate;
-  box-shadow:0 0 15px rgba(59,130,246,0.6);
-}
-.ad-btn:hover,.task-card button:hover,.form button:hover,.method:hover{
-  transform:scale(1.03);
-  box-shadow:0 0 25px rgba(236,72,153,0.8);
-}
-@keyframes glowMove{
-  0%{background-position:0% 50%;}
-  100%{background-position:100% 50%;}
-}
-#adBtn:disabled{opacity:0.5;cursor:not-allowed;}
-#msg{text-align:center;margin-top:10px;font-size:15px;color:#fff8b0;}
-
-.method-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:10px;}
-.method{background:rgba(255,255,255,0.12);}
-.form{display:none;margin-top:18px;}
-
-/* 💡 Burda input dizaynı yaxşılaşdırılıb */
-.form input{
-  width:100%;
-  padding:12px;
-  margin-top:8px;
-  border:none;
-  border-radius:10px;
-  background:rgba(255,255,255,.18);
-  color:#fff;
-  font-size:16px;
-  font-weight:600;
-  outline:none;
-  transition:0.2s;
-}
-.form input::placeholder{
-  color:#e2e8f0;
-  opacity:0.8;
-}
-.form input:focus{
-  background:rgba(255,255,255,0.25);
-  box-shadow:0 0 10px rgba(255,255,255,0.3);
-}
-
-.alert{display:none;margin-top:10px;padding:10px;border-radius:10px;font-weight:700;text-align:center;}
-.success{background:#16a34a;}
-.error{background:#ef4444;}
-
-.menu{
-  position:fixed;bottom:15px;left:50%;transform:translateX(-50%);
-  width:92%;display:flex;justify-content:space-around;
-  background:rgba(17,24,39,0.9);
-  padding:10px;border-radius:20px;
-  box-shadow:0 6px 20px rgba(0,0,0,.6);
-}
-.menu button{
-  flex:1;margin:0 4px;padding:10px;
-  border:none;border-radius:12px;
-  background:rgba(255,255,255,.07);
-  color:#fff;font-weight:700;
-  transition:0.3s;
-}
-.menu button.active{
-  background:linear-gradient(90deg,#3b82f6,#8b5cf6);
-  box-shadow:0 0 10px rgba(139,92,246,0.7);
-}
-.copy-msg{font-size:13px;color:#86efac;margin-top:8px;display:none;}
+.ad-card,.task-card,.ref-card{background:var(--glass);border-radius:20px;padding:26px;text-align:center;box-shadow:0 6px 28px rgba(0,0,0,.4);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.15);}
+.ad-card h2,.task-card h2,.ref-card h2{font-size:22px;color:#f0f9ff;text-shadow:0 0 6px rgba(255,255,255,0.4);}
+.menu{position:fixed;bottom:15px;left:50%;transform:translateX(-50%);width:92%;display:flex;justify-content:space-around;background:rgba(17,24,39,0.9);padding:10px;border-radius:20px;box-shadow:0 6px 20px rgba(0,0,0,.6);}
+.menu button{flex:1;margin:0 4px;padding:10px;border:none;border-radius:12px;background:rgba(255,255,255,.07);color:#fff;font-weight:700;transition:0.3s;}
+.menu button.active{background:linear-gradient(90deg,#3b82f6,#8b5cf6);box-shadow:0 0 10px rgba(139,92,246,0.7);}
+button, .ad-btn{cursor:pointer;}
 </style>
 </head>
 <body>
 
 <div class="container">
 
-  <!-- Reklam səhifəsi -->
+  <!-- 🏠 Reklam səhifəsi -->
   <div id="adsPage" class="page active">
     <div class="balance-card">
       <h3>Balansınız</h3>
       <div class="amount"><span id="balance">0.0000</span> ₼</div>
       <div class="usd">≈ $<span id="usd">0.00</span></div>
     </div>
-
     <div class="ad-card">
       <h2>Gündəlik Reklamlar</h2>
       <p>Hər reklama görə <b>0.0020 ₼</b> qazanın</p>
-      <div class="stats">
-        <div class="stat"><span id="adsCount">0</span><label>İzlənən</label></div>
-        <div class="stat"><span>75</span><label>Maksimum</label></div>
-      </div>
-      <div class="progress"><div class="progress-fill" id="progress"></div></div>
-      <p style="margin-top:6px;">İrəliləyiş: <span id="progressText">0/75</span></p>
       <button id="adBtn" class="ad-btn">▶ İndi izlə</button>
       <div id="msg"></div>
     </div>
   </div>
 
-  <!-- Görəvlər -->
+  <!-- 🎯 Görəvlər -->
   <div id="tasksPage" class="page">
     <div class="task-card">
       <h2>🎯 Gündəlik Tapşırıq</h2>
@@ -181,337 +71,100 @@ body{
     </div>
   </div>
 
-  <!-- Referans -->
+  <!-- 👥 Referans -->
   <div id="refsPage" class="page">
     <div class="ref-card">
       <h2>👥 Referans Sistemi</h2>
-      <p>Dəvət etdikcə qazanın! Hər dost üçün <b>0.10 ₼</b></p>
+      <p>Hər dost üçün 0.10 ₼ qazanın!</p>
       <div style="background:rgba(255,255,255,0.1);padding:10px;border-radius:10px;margin-top:15px;">
         <b>Sizin linkiniz:</b><br>
-        <small id="refLink" style="word-break:break-all;display:block;margin-top:6px;"></small>
-        <button id="copyRef" style="margin-top:10px;padding:6px 12px;border:none;border-radius:8px;background:#3b82f6;color:#fff;font-weight:600;">Kopyala</button>
-        <div id="copyMsg" class="copy-msg">Kopyalandı ✅</div>
+        <small id="refLink" style="word-break:break-all;cursor:pointer;color:#93c5fd;"></small>
+        <div id="copyMsg" style="font-size:13px;color:#a5f3fc;margin-top:6px;"></div>
       </div>
       <p style="margin-top:10px;">Dəvət sayı: <b id="refCount">0</b></p>
     </div>
   </div>
 
+  <!-- 💳 Cüzdan -->
+  <div id="walletPage" class="page">
+    <div class="balance-card">
+      <h3>Balansınız</h3>
+      <div class="amount"><span id="balance2">0.0000</span> ₼</div>
+      <div class="usd">≈ $<span id="usd2">0.00</span></div>
+    </div>
+  </div>
+
 </div>
 
+<!-- 🔘 Menyu -->
 <div class="menu">
   <button onclick="showPage('adsPage',this)" class="active">🏠 Reklam</button>
   <button onclick="showPage('tasksPage',this)">🎯 Görəvlər</button>
   <button onclick="showPage('refsPage',this)">👥 Referans</button>
+  <button onclick="showPage('walletPage',this)">💳 Cüzdan</button>
 </div>
 
-<!-- -------------------------
-  Firebase + Referans Script
-  ------------------------- -->
+<!-- ⚙️ Scriptlər -->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-  import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
 
-  // --- Firebase config (senin verdiğin) ---
-  const firebaseConfig = {
-    apiKey: "AIzaSyD0dnb927FbT2LjZf06hxB6lBX2JaBdevc",
-    authDomain: "qazanc-az-64da7.firebaseapp.com",
-    projectId: "qazanc-az-64da7",
-    storageBucket: "qazanc-az-64da7.firebasestorage.app",
-    messagingSenderId: "1069574349445",
-    appId: "1:1069574349445:web:b815928eca716f89617fec",
-    measurementId: "G-Y5ZHFYLGMC"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyD0dnb927FbT2LjZf06hxB6lBX2JaBdevc",
+  authDomain: "qazanc-az-64da7.firebaseapp.com",
+  projectId: "qazanc-az-64da7",
+  storageBucket: "qazanc-az-64da7.firebasestorage.app",
+  messagingSenderId: "1069574349445",
+  appId: "1:1069574349445:web:b815928eca716f89617fec",
+  measurementId: "G-Y5ZHFYLGMC"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+// Telegram məlumatı
+const tg = window.Telegram?.WebApp;
+tg?.expand();
+const user = tg?.initDataUnsafe?.user;
+const userId = user?.id?.toString() || "test_user";
+const startParam = tg?.initDataUnsafe?.start_param || "";
+const invitedBy = startParam || "";
 
-  // --- Telegram Mini App veya URL'den UID/startapp yakalama ---
-  const tg = window.Telegram?.WebApp;
-  if (tg) tg.expand();
-
-  // start_param is preferred (Telegram passes startapp/start_param depending on setup)
-  const startParam = tg?.initDataUnsafe?.start_param || null;
-
-  // Also accept URL param fallback for direct web testing:
-  const urlParams = new URLSearchParams(window.location.search);
-  const urlStart = urlParams.get('startapp') || urlParams.get('ref') || null;
-
-  // Final invitedBy (davet edenin UID) comes from either startParam (Telegram) or urlStart
-  const invitedBy = startParam || urlStart || "";
-
-  // Determine current user's UID:
-  // In Telegram Mini App we expect initDataUnsafe.user.id; otherwise fallback to a test id (for browser testing)
-  const currentUserId = (tg?.initDataUnsafe?.user?.id ? String(tg.initDataUnsafe.user.id) : null) || (urlParams.get('uid') || "test_user_" + String(Math.floor(Math.random()*1000000)));
-
-  // ---------------------
-  // Firestore helper functions
-  // ---------------------
-  const usersCollection = (uid) => doc(db, "users", uid);
-
-  async function createIfNotExists(uid, invitedByForUser) {
-    const uRef = usersCollection(uid);
-    const snap = await getDoc(uRef);
-    if (!snap.exists()) {
-      // create user doc, give starting balance 0 (we'll not auto-give extra except if you want initial welcome)
-      await setDoc(uRef, {
-        balance: 0,
-        invited_by: invitedByForUser || "",
-        referral_count: 0
-      });
-      // if invitedByForUser present, reward inviter
-      if (invitedByForUser) {
-        const invRef = usersCollection(invitedByForUser);
-        // Use update with increment if exists, but if not exists create inviter with initial values then increment
-        try {
-          await updateDoc(invRef, {
-            referral_count: increment(1),
-            balance: increment(0.1)
-          });
-        } catch (e) {
-          // inviter doc didn't exist — create it with the bonus
-          await setDoc(invRef, {
-            balance: 0.1,
-            invited_by: "",
-            referral_count: 1
-          });
-        }
-      }
-    }
-  }
-
-  // get user data
-  async function getUserData(uid) {
-    const uRef = usersCollection(uid);
-    const snap = await getDoc(uRef);
-    if (snap.exists()) return snap.data();
-    return null;
-  }
-
-  // increment user's balance atomically
-  async function addBalance(uid, amount) {
-    const uRef = usersCollection(uid);
-    try {
-      await updateDoc(uRef, { balance: increment(amount) });
-    } catch (e) {
-      // if update fails because doc not exists, create then update
-      await setDoc(uRef, { balance: amount, invited_by: "", referral_count: 0 }, { merge: true });
-    }
-  }
-
-  // set a numeric field (used when syncing local->server)
-  async function setBalance(uid, amount) {
-    const uRef = usersCollection(uid);
-    await updateDoc(uRef, { balance: amount }).catch(async ()=> {
-      await setDoc(uRef, { balance: amount, invited_by: "", referral_count: 0 }, { merge:true });
-    });
-  }
-
-  // ---------------------
-  // Initialize user on load
-  // ---------------------
-  (async function init() {
-    // create user if not exists and reward inviter
-    await createIfNotExists(currentUserId, invitedBy);
-
-    // load data to UI
-    const data = await getUserData(currentUserId);
-    if (data) {
-      // show balance
-      const balEl = document.getElementById('balance');
-      const usdEl = document.getElementById('usd');
-      const refCountEl = document.getElementById('refCount');
-      if (balEl) balEl.textContent = Number(data.balance || 0).toFixed(4);
-      if (usdEl) usdEl.textContent = (Number(data.balance || 0) * 0.59).toFixed(2);
-      if (refCountEl) refCountEl.textContent = data.referral_count || 0;
-    }
-
-    // Fill ref link
-    const refLinkEl = document.getElementById('refLink');
-    const refUrl = `https://t.me/reklampaybot?startapp=${currentUserId}`;
-    if (refLinkEl) refLinkEl.innerText = refUrl;
-  })();
-
-  // Expose helper to main (legacy) script: add to balance both locally and in Firestore
-  window._qazanc_addBalance = async function(amount) {
-    // update firestore
-    await addBalance(currentUserId, amount);
-    // update UI from server
-    const newData = await getUserData(currentUserId);
-    if (newData) {
-      const balEl = document.getElementById('balance');
-      const usdEl = document.getElementById('usd');
-      if (balEl) balEl.textContent = Number(newData.balance || 0).toFixed(4);
-      if (usdEl) usdEl.textContent = (Number(newData.balance || 0) * 0.59).toFixed(2);
-    }
-    // return updated data
-    return newData;
-  };
-
-  // Expose setter to sync local change to server (used by withdraw etc.)
-  window._qazanc_setBalance = async function(amount) {
-    await setBalance(currentUserId, amount);
-    const newData = await getUserData(currentUserId);
-    if (newData) {
-      const balEl = document.getElementById('balance');
-      const usdEl = document.getElementById('usd');
-      if (balEl) balEl.textContent = Number(newData.balance || 0).toFixed(4);
-      if (usdEl) usdEl.textContent = (Number(newData.balance || 0) * 0.59).toFixed(2);
-    }
-    return newData;
-  };
-
-  // Expose currentUserId for other scripts if needed
-  window._qazanc_currentUserId = currentUserId;
-
-</script>
-
-<!-- -------------------------
-  Orijinal site script (korunmuş) — küçük entegrasyonlarla Firestore'a bağlandılar
-  ------------------------- -->
-<script>
-/* -------------------------
-   Orijinal kodun saf hali (senin gönderdiğin) korunmuştur.
-   Sadece aşağıdaki yerlere küçük dokunuş yapıldı:
-   - Reklam / join butonları bakiye güncellerken hem localStorage hem Firestore'a yazacak.
-   - Withdraw (çıxarış) işlemi bakiyeyi local'den düşüp Firestore'a senkronlayacak.
-   - Referans kopyalama butonu orijinal tasarıma eklendi.
-   ------------------------- */
-
-const LIMIT=75,REWARD=0.0020;
-const BAL_KEY='bal',COUNT_KEY='cnt',RESET_KEY='resetTime',JOIN_KEY='joined';
-
-function safeGet(k,d=0){try{return JSON.parse(localStorage.getItem(k))??d;}catch{return d;}}
-function safeSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){document.cookie=k+"="+encodeURIComponent(v)+";max-age=31536000;path=/";}}
-
-let bal=parseFloat(safeGet(BAL_KEY,0));
-let cnt=parseInt(safeGet(COUNT_KEY,0));
-let resetTime=safeGet(RESET_KEY,null);
-
-function getNextResetTime(){
-  const now=new Date();
-  const reset=new Date();
-  reset.setUTCHours(19,0,0,0);
-  if(now.getTime()>reset.getTime()) reset.setDate(reset.getDate()+1);
-  return reset.getTime();
-}
-
-if(!resetTime||Date.now()>resetTime){
-  cnt=0;
-  resetTime=getNextResetTime();
-  safeSet(RESET_KEY,resetTime);
-  safeSet(COUNT_KEY,cnt);
-}
-
-function update(){
-  document.getElementById('balance').textContent=bal.toFixed(4);
-  document.getElementById('usd').textContent=(bal*0.59).toFixed(2);
-  document.getElementById('balance2')?.textContent=bal.toFixed(4);
-  document.getElementById('usd2')?.textContent=(bal*0.59).toFixed(2);
-  document.getElementById('adsCount').textContent=cnt;
-  document.getElementById('progress').style.width=(cnt/LIMIT*100)+'%';
-  document.getElementById('progressText').textContent=`${cnt}/${LIMIT}`;
-  safeSet(BAL_KEY,bal);safeSet(COUNT_KEY,cnt);
-}
-update();
-
-/* ---- Reklam butonu ----
-   Orijinal davranış korunur: localStorage bazlı sayaç ve görsel geri bildirim.
-   Ancak kazanç Firestore'a da eklenecek (0.0020 AZN).
-*/
-const adBtn=document.getElementById('adBtn'),msg=document.getElementById('msg');
-adBtn.onclick=()=>{
-  if(cnt>=LIMIT){msg.textContent='📣 Gündəlik limitə çatdınız!';return;}
-  try{if(typeof show_10024800==='function')show_10024800();}catch(e){}
-  adBtn.disabled=true;msg.textContent='İzlənir...';
-  setTimeout(async ()=>{
-    // local update
-    bal+=REWARD;cnt++;update();
-    msg.textContent='✅ +0.0020 ₼ əlavə olundu!';
-    // firestore update
-    try{
-      if(window._qazanc_addBalance) await window._qazanc_addBalance(REWARD);
-    }catch(e){
-      console.warn("Firestore reklam balanç güncellenemedi:",e);
-    }
-    let s=8;const t=setInterval(()=>{msg.textContent=`⏳ ${s--}s gözləyin`;if(s<0){clearInterval(t);adBtn.disabled=false;msg.textContent='';}},1000);
-  },2500);
+// Referans linki
+const refLink = `https://t.me/reklampaybot?startapp=${userId}`;
+const refLinkEl = document.getElementById("refLink");
+refLinkEl.textContent = refLink;
+refLinkEl.onclick = () => {
+  navigator.clipboard.writeText(refLink);
+  document.getElementById("copyMsg").textContent = "📋 Kopyalandı!";
+  setTimeout(()=>document.getElementById("copyMsg").textContent="",2000);
 };
 
-/* ---- Join (task) butonu ----
-   Orijinal davranış korunur (localStorage). Bonus 0.05 AZN.
-   Also sync to Firestore.
-*/
-const joinBtn=document.getElementById('joinBtn');
-if(localStorage.getItem(JOIN_KEY)){joinBtn.textContent='✅ Bonus alındı!';joinBtn.disabled=true;}
-joinBtn.onclick= async ()=>{
-  if(localStorage.getItem(JOIN_KEY))return;
-  bal+=0.05;safeSet(BAL_KEY,bal);localStorage.setItem(JOIN_KEY,'1');
-  // sync to Firestore
-  try{ if(window._qazanc_addBalance) await window._qazanc_addBalance(0.05); } catch(e){console.warn("Firestore join sync failed",e); }
-  joinBtn.textContent='✅ Bonus alındı!';joinBtn.disabled=true;
-  window.open('https://t.me/qazancazicmasi','_blank');
-  update();
-};
-
-/* ---- Cüzdan / Çıxarış mantığı ----
-   Orijinal olarak çekim işlemi sadece local'da bakiye düşürüp bildirim veriyordu.
-   Buraya Firestore sync ekledim: bakiye düştükçe servera da setBalance çağrılır.
-*/
-const methods=document.querySelectorAll('.method');
-const form=document.getElementById('form');const details=document.getElementById('details');
-const amount=document.getElementById('amount');const alertBox=document.getElementById('alert');
-let type='';
-const min={m10:3,azercell:3,bakcell:3,nar:3,bank:3,usdt:17};
-const ph={m10:'10 rəqəmli nömrə',azercell:'050xxxxxxx',bakcell:'055xxxxxxx',nar:'070xxxxxxx',bank:'16 rəqəmli kart nömrəsi',usdt:'TON adresi'};
-if(methods) methods.forEach(m=>m.onclick=()=>{type=m.dataset.type;document.getElementById('methods').style.display='none';form.style.display='block';details.placeholder=ph[type];});
-document.getElementById('backBtn')?.addEventListener('click',()=>{form.style.display='none';document.getElementById('methods').style.display='grid';});
-document.getElementById('withdrawBtn')?.addEventListener('click', async ()=>{
-  const det=details.value.trim();const amt=parseFloat(amount.value);
-  alertBox.style.display='none';
-  if(!type){showErr('Metod seçin');return;}
-  if(!det){showErr('Detalları daxil edin');return;}
-  if(isNaN(amt)||amt<=0){showErr('Məbləği düzgün daxil edin');return;}
-  if(amt<min[type]){showErr(`Minimum məbləğ ${min[type]} AZN`);return;}
-  if(amt>bal){showErr('Balans kifayət etmir');return;}
-  bal-=amt;safeSet(BAL_KEY,bal);update();
-  // sync server
-  try{ if(window._qazanc_setBalance) await window._qazanc_setBalance(bal); } catch(e){console.warn("Firestore withdraw sync failed",e); }
-  alertBox.textContent='✅ Çıxarış göndərildi!';alertBox.className='alert success';alertBox.style.display='block';
-  setTimeout(()=>{form.style.display='none';document.getElementById('methods').style.display='grid';},1500);
-});
-function showErr(t){alertBox.textContent=t;alertBox.className='alert error';alertBox.style.display='block';}
-
-/* ---- Referans kopyalama ----
-   Kopyala düğmesine dokunulduğunda panoya kopyala ve bildirim göster.
-*/
-document.getElementById('copyRef').addEventListener('click', async ()=>{
-  const refText = document.getElementById('refLink').innerText || (`https://t.me/reklampaybot?startapp=${window._qazanc_currentUserId || 'test_user'}`);
-  try {
-    await navigator.clipboard.writeText(refText);
-    const msg = document.getElementById('copyMsg');
-    msg.style.display = 'block';
-    setTimeout(()=> msg.style.display='none',1500);
-  } catch (e) {
-    alert('Kopyalama uğursuz oldu. Brauzer kopyalama dəstəyi lazımdır.');
+// Firestore referans sistemi
+async function initUser(){
+  const userRef = doc(db, "users", userId);
+  const snap = await getDoc(userRef);
+  if(!snap.exists()){
+    await setDoc(userRef,{balance:0, invited_by:invitedBy, referral_count:0});
+    if(invitedBy){
+      const inviterRef = doc(db, "users", invitedBy);
+      await updateDoc(inviterRef, {
+        balance: increment(0.1),
+        referral_count: increment(1)
+      }).catch(()=>{});
+    }
   }
-});
+  const data = (await getDoc(userRef)).data();
+  document.getElementById("refCount").textContent = data.referral_count ?? 0;
+}
+initUser();
 
-/* ---- Sayfa görünümü fonksiyonu (orijinal) ---- */
+// səhifə dəyişimi
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
+  btn.classList.add('active');
 }
-
-/* ---- Firestore realtime sync (listen) ----
-   Eğer dokümant dinlenmesi istersen, add snapshot listener — fakat
-   eski kod localStorage ile çalıştığı için burada sadece UI güncelleme yapıyoruz.
-   (İstersen gerçek-time listener ekleyebilirim)
-*/
-(async function listenServerBalance(){
-  // try to add realtime listener (best-effort)
-  try{
-    const uid = window._qazanc_currentUserId;
-    if(uid){
-      const dbModule = window.firebaseFirestoreModule; // not used, but reser
+</script>
+</body>
+</html>
