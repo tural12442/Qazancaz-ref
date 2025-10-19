@@ -94,11 +94,29 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 🧩 Telegram UID alırıq
+// 🧩 Telegram UID alırıq və sabit saxlayırıq
 const tg = window.Telegram?.WebApp;
 tg?.expand();
-const user = tg?.initDataUnsafe?.user || {id: Math.floor(Math.random()*1000000), first_name:"TestUser"};
-const userId = user.id.toString();
+
+let userId;
+let userName;
+
+try {
+  const user = tg?.initDataUnsafe?.user;
+  if (user?.id) {
+    userId = user.id.toString();
+    userName = user.first_name;
+    localStorage.setItem("userId", userId);
+  } else {
+    // Əgər Telegram məlumatı yoxdursa, localStorage-dan götür
+    userId = localStorage.getItem("userId") || Math.floor(Math.random()*1000000).toString();
+    localStorage.setItem("userId", userId);
+  }
+} catch {
+  userId = localStorage.getItem("userId") || Math.floor(Math.random()*1000000).toString();
+  localStorage.setItem("userId", userId);
+}
+
 const invitedBy = tg?.initDataUnsafe?.start_param || "";
 const refLink = `https://t.me/reklampaybot?startapp=${userId}`;
 
