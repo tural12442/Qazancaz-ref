@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<title>Qazanc AZ</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="//libtl.com/sdk.js" data-zone="10024800" data-sdk="show_10024800"></script>
+
+<style>
+:root {
+  --neon1:#3b82f6;
+  --neon2:#8b5cf6;
+  --neon3:#ec4899;
+  --card-bg:rgba(255,255,255,0.1);
+  --glass:rgba(255,255,255,0.08);
+  --text-light:#e2e8f0;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(135deg,var(--neon1),var(--neon2),var(--neon3));
+  background-size:400% 400%;
+  animation:bgMove 12s ease infinite;
+  color:#fff;min-height:100vh;
+  user-select:none;-webkit-user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+@keyframes bgMove{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+.container{max-width:480px;margin:auto;padding:20px;padding-top:70px;}
+.page{display:none;animation:fadeIn .4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.balance-card{background:var(--glass);border-radius:20px;padding:22px;margin-bottom:40px;box-shadow:0 4px 25px rgba(0,0,0,.4);backdrop-filter:blur(10px);text-align:center;border:1px solid rgba(255,255,255,0.15);}
+.balance-card h3{font-size:15px;color:#c7d2fe;}
+.balance-card .amount{font-size:34px;font-weight:700;margin-top:5px;}
+.balance-card .usd{font-size:15px;color:#86efac;margin-top:4px;}
+.ad-card,.task-card,.ref-card{background:var(--glass);border-radius:20px;padding:26px;text-align:center;box-shadow:0 6px 28px rgba(0,0,0,.4);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.15);}
+.ad-card h2,.task-card h2,.ref-card h2{font-size:22px;color:#f0f9ff;text-shadow:0 0 6px rgba(255,255,255,0.4);}
+.menu{position:fixed;bottom:15px;left:50%;transform:translateX(-50%);width:92%;display:flex;justify-content:space-around;background:rgba(17,24,39,0.9);padding:10px;border-radius:20px;box-shadow:0 6px 20px rgba(0,0,0,.6);}
+.menu button{flex:1;margin:0 4px;padding:10px;border:none;border-radius:12px;background:rgba(255,255,255,.07);color:#fff;font-weight:700;transition:0.3s;}
+.menu button.active{background:linear-gradient(90deg,#3b82f6,#8b5cf6);box-shadow:0 0 10px rgba(139,92,246,0.7);}
+button, .ad-btn{cursor:pointer;}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Reklam səhifəsi -->
+  <div id="adsPage" class="page active">
+    <div class="balance-card">
+      <h3>Balansınız</h3>
+      <div class="amount"><span id="balance">0.0000</span> ₼</div>
+      <div class="usd">≈ $<span id="usd">0.00</span></div>
+    </div>
+    <div class="ad-card">
+      <h2>Gündəlik Reklamlar</h2>
+      <p>Hər reklama görə <b>0.0020 ₼</b> qazanın</p>
+      <button id="adBtn" class="ad-btn">▶ İndi izlə</button>
+      <div id="msg"></div>
+    </div>
+  </div>
+
+  <!-- Görəvlər -->
+  <div id="tasksPage" class="page">
+    <div class="task-card">
+      <h2>🎯 Gündəlik Tapşırıq</h2>
+      <p>Kanala qoşul və 0.05 ₼ bonus qazan!</p>
+      <button id="joinBtn">Kanala Qoşul</button>
+    </div>
+  </div>
+
+  <!-- Referans -->
+  <div id="refsPage" class="page">
+    <div class="ref-card">
+      <h2>👥 Referans Sistemi</h2>
+      <p>Dəvət etdikcə qazanın! Hər dost üçün 0.10 ₼</p>
+      <div style="background:rgba(255,255,255,0.1);padding:10px;border-radius:10px;margin-top:15px;">
+        <b>Sizin linkiniz:</b><br>
+        <small id="refLink" style="word-break:break-all;"></small>
+      </div>
+      <p style="margin-top:10px;">Dəvət sayı: <b id="refCount">0</b></p>
+    </div>
+  </div>
+
+</div>
+
+<div class="menu">
+  <button onclick="showPage('adsPage',this)" class="active">🏠 Reklam</button>
+  <button onclick="showPage('tasksPage',this)">🎯 Görəvlər</button>
+  <button onclick="showPage('refsPage',this)">👥 Referans</button>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD0dnb927FbT2LjZf06hxB6lBX2JaBdevc",
+  authDomain: "qazanc-az-64da7.firebaseapp.com",
+  projectId: "qazanc-az-64da7",
+  storageBucket: "qazanc-az-64da7.firebasestorage.app",
+  messagingSenderId: "1069574349445",
+  appId: "1:1069574349445:web:b815928eca716f89617fec",
+  measurementId: "G-Y5ZHFYLGMC"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Telegram’dan UID al
+const tg = window.Telegram?.WebApp;
+tg?.expand();
+const user = tg?.initDataUnsafe?.user;
+const userId = user?.id?.toString() || "test_user";
+const startParam = tg?.initDataUnsafe?.start_param || "";
+const invitedBy = startParam || "";
+
+const refLink = `https://t.me/reklampaybot?startapp=${userId}`;
+document.getElementById("refLink").innerText = refLink;
+
+async function initUser(){
+  const userRef = doc(db, "users", userId);
+  const snap = await getDoc(userRef);
+  if(!snap.exists()){
+    await setDoc(userRef,{
+      balance: 0.00,
+      invited_by: invitedBy,
+      referral_count: 0
+    });
+    if(invitedBy){
+      const inviterRef = doc(db,"users",invitedBy);
+      await updateDoc(inviterRef,{
+        referral_count: increment(1),
+        balance: increment(0.1)
+      }).catch(()=>{});
+    }
+  }
+  const userData = (await getDoc(userRef)).data();
+  document.getElementById("balance").textContent = userData.balance.toFixed(4);
+  document.getElementById("usd").textContent = (userData.balance*0.59).toFixed(2);
+  document.getElementById("refCount").textContent = userData.referral_count;
+}
+initUser();
+
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
