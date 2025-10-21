@@ -1,164 +1,315 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Referans Sistemi</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<title>Qazanc AZ</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="//libtl.com/sdk.js" data-zone="10024800" data-sdk="show_10024800"></script>
+
 <style>
-body {
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
-  color: white;
-  min-height: 100vh;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  animation: bgMove 10s infinite alternate;
-  background-size: 400% 400%;
+:root {
+  --neon1:#3b82f6;
+  --neon2:#8b5cf6;
+  --neon3:#ec4899;
+  --card-bg:rgba(255,255,255,0.1);
+  --glass:rgba(255,255,255,0.08);
+  --text-light:#e2e8f0;
 }
-@keyframes bgMove {
-  0% {background-position: 0% 50%;}
-  100% {background-position: 100% 50%;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(135deg,var(--neon1),var(--neon2),var(--neon3));
+  background-size:400% 400%;
+  animation:bgMove 12s ease infinite;
+  color:#fff;min-height:100vh;
+  user-select:none;-webkit-user-select:none;
+  -webkit-tap-highlight-color:transparent;
 }
-.container {
-  background: rgba(255,255,255,0.1);
-  border-radius: 16px;
-  padding: 30px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-  backdrop-filter: blur(10px);
+@keyframes bgMove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
 }
-h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
+.container{max-width:480px;margin:auto;padding:20px;padding-top:70px;}
+.page{display:none;animation:fadeIn .4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+.balance-card{
+  background:var(--glass);
+  border-radius:20px;padding:22px;
+  margin-bottom:40px;
+  box-shadow:0 4px 25px rgba(0,0,0,.4);
+  backdrop-filter:blur(10px);
+  text-align:center;
+  border:1px solid rgba(255,255,255,0.15);
 }
-p {color: #e0e7ff;}
-.ref-link {
-  background: rgba(255,255,255,0.15);
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 14px;
-  word-break: break-all;
-  cursor: pointer;
-  transition: 0.3s;
+.balance-card h3{font-size:15px;color:#c7d2fe;}
+.balance-card .amount{font-size:34px;font-weight:700;margin-top:5px;}
+.balance-card .usd{font-size:15px;color:#86efac;margin-top:4px;}
+
+.ad-card,.task-card{
+  background:var(--glass);
+  border-radius:20px;
+  padding:26px;
+  text-align:center;
+  box-shadow:0 6px 28px rgba(0,0,0,.4);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.15);
 }
-.ref-link:hover { background: rgba(255,255,255,0.25); }
-button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
+.ad-card h2,.task-card h2{
+  font-size:22px;
+  color:#f0f9ff;
+  text-shadow:0 0 6px rgba(255,255,255,0.4);
 }
-button:hover { transform: scale(1.05); }
+.ad-card p{margin:6px 0;color:#e2e8f0;font-size:15px;}
+.stats{display:flex;justify-content:space-around;margin-top:16px;}
+.stat{background:rgba(255,255,255,.1);border-radius:12px;padding:10px 20px;}
+.stat span{display:block;font-size:19px;font-weight:700;}
+.stat label{font-size:13px;color:#cbd5e1;}
+.progress{height:8px;background:rgba(255,255,255,0.2);border-radius:6px;overflow:hidden;margin-top:16px;}
+.progress-fill{height:100%;background:#22d3ee;width:0%;transition:width .4s;}
+.ad-btn,.task-card button,.form button,.method{
+  width:100%;
+  margin-top:18px;
+  padding:15px;
+  font-size:17px;
+  font-weight:700;
+  border:none;
+  border-radius:14px;
+  color:#fff;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:0.3s;
+  background:linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899);
+  background-size:300% 300%;
+  animation:glowMove 6s infinite alternate;
+  box-shadow:0 0 15px rgba(59,130,246,0.6);
+}
+.ad-btn:hover,.task-card button:hover,.form button:hover,.method:hover{
+  transform:scale(1.03);
+  box-shadow:0 0 25px rgba(236,72,153,0.8);
+}
+@keyframes glowMove{
+  0%{background-position:0% 50%;}
+  100%{background-position:100% 50%;}
+}
+#adBtn:disabled{opacity:0.5;cursor:not-allowed;}
+#msg{text-align:center;margin-top:10px;font-size:15px;color:#fff8b0;}
+
+.method-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:10px;}
+.method{background:rgba(255,255,255,0.12);}
+.form{display:none;margin-top:18px;}
+.form input{
+  width:100%;
+  padding:12px;
+  margin-top:8px;
+  border:none;
+  border-radius:10px;
+  background:rgba(255,255,255,.18);
+  color:#fff;
+  font-size:16px;
+  font-weight:600;
+  outline:none;
+  transition:0.2s;
+}
+.form input::placeholder{color:#e2e8f0;opacity:0.8;}
+.form input:focus{background:rgba(255,255,255,0.25);box-shadow:0 0 10px rgba(255,255,255,0.3);}
+.alert{display:none;margin-top:10px;padding:10px;border-radius:10px;font-weight:700;text-align:center;}
+.success{background:#16a34a;}
+.error{background:#ef4444;}
+.menu{
+  position:fixed;bottom:15px;left:50%;transform:translateX(-50%);
+  width:92%;display:flex;justify-content:space-around;
+  background:rgba(17,24,39,0.9);
+  padding:10px;border-radius:20px;
+  box-shadow:0 6px 20px rgba(0,0,0,.6);
+}
+.menu button{
+  flex:1;margin:0 4px;padding:10px;
+  border:none;border-radius:12px;
+  background:rgba(255,255,255,.07);
+  color:#fff;font-weight:700;
+  transition:0.3s;
+}
+.menu button.active{
+  background:linear-gradient(90deg,#3b82f6,#8b5cf6);
+  box-shadow:0 0 10px rgba(139,92,246,0.7);
+}
 </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>👥 Referans Sistemi</h1>
-  <p>Dəvət et və hər dost üçün <b>0.10 ₼</b> qazan!</p>
-  <div id="refLink" class="ref-link">Yüklənir...</div>
-  <p style="margin-top:10px;">Dəvət sayı: <b id="refCount">0</b></p>
-  <p>Balans: <b id="balance">0.0000 ₼</b></p>
+
+  <!-- Reklam səhifəsi -->
+  <div id="adsPage" class="page active">
+    <div class="balance-card">
+      <h3>Balansınız</h3>
+      <div class="amount"><span id="balance">0.0000</span> ₼</div>
+      <div class="usd">≈ $<span id="usd">0.00</span></div>
+    </div>
+
+    <div class="ad-card">
+      <h2>Gündəlik Reklamlar</h2>
+      <p>Hər reklama görə <b>0.0020 ₼</b> qazanın</p>
+      <div class="stats">
+        <div class="stat"><span id="adsCount">0</span><label>İzlənən</label></div>
+        <div class="stat"><span>75</span><label>Maksimum</label></div>
+      </div>
+      <div class="progress"><div class="progress-fill" id="progress"></div></div>
+      <p style="margin-top:6px;">İrəliləyiş: <span id="progressText">0/75</span></p>
+      <button id="adBtn" class="ad-btn">▶ İndi izlə</button>
+      <div id="msg"></div>
+    </div>
+  </div>
+
+  <!-- Görəvlər -->
+  <div id="tasksPage" class="page">
+    <div class="task-card">
+      <h2>🎯 Premium Tapşırıq</h2>
+      <p>Kanala qoşul və 0.05 ₼ bonus qazan!</p>
+      <button id="joinBtn">Kanala Qoşul</button>
+    </div>
+  </div>
+
+  <!-- Cüzdan -->
+  <div id="walletPage" class="page">
+    <div class="balance-card">
+      <h3>Balansınız</h3>
+      <div class="amount"><span id="balance2">0.0000</span> ₼</div>
+      <div class="usd">≈ $<span id="usd2">0.00</span></div>
+    </div>
+
+    <h2 style="text-align:center;margin-bottom:12px;color:#f0f9ff;">Çıxarış</h2>
+    <div class="method-grid" id="methods">
+      <div class="method" data-type="m10">📞 M10</div>
+      <div class="method" data-type="azercell">📞 Azercell</div>
+      <div class="method" data-type="bakcell">📞 Bakcell</div>
+      <div class="method" data-type="nar">📞 Nar</div>
+      <div class="method" data-type="bank">💳 Bank Kartı</div>
+      <div class="method" data-type="usdt">💵 USDT (TON)</div>
+    </div>
+    <div class="form" id="form">
+      <button id="backBtn" style="background:none;border:none;color:#93c5fd;font-weight:700;">⬅ Geri</button>
+      <input id="details" placeholder="">
+      <input id="amount" type="number" placeholder="Məbləğ (AZN)">
+      <button id="withdrawBtn">Çıxarış Et</button>
+      <div id="alert" class="alert"></div>
+    </div>
+  </div>
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+<!-- Menyu -->
+<div class="menu">
+  <button onclick="showPage('adsPage',this)" class="active">🏠 Reklam</button>
+  <button onclick="showPage('tasksPage',this)">🎯 Görəvlər</button>
+  <button onclick="showPage('walletPage',this)">💳 Cüzdan</button>
+</div>
 
-// 🔥 Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyD0dnb927FbT2LjZf06hxB6lBX2JaBdevc",
-  authDomain: "qazanc-az-64da7.firebaseapp.com",
-  projectId: "qazanc-az-64da7",
-  storageBucket: "qazanc-az-64da7.firebasestorage.app",
-  messagingSenderId: "1069574349445",
-  appId: "1:1069574349445:web:b815928eca716f89617fec",
-  measurementId: "G-Y5ZHFYLGMC"
+<!-- 🔥 ADMIN PANEL (yalnız UID 5461064199 üçün) -->
+<div id="adminPanel" style="display:none; padding:20px; max-width:480px; margin:80px auto; background:rgba(0,0,0,0.3); border-radius:16px;">
+  <h2>👑 Admin Panel</h2>
+  <button id="showAddBalance" style="margin-bottom:10px;">+ Balans əlavə et</button>
+
+  <div id="addBalanceForm" style="display:none; margin-top:10px;">
+    <input type="text" id="userUidInput" placeholder="İstifadəçi UID yaz" style="padding:5px; width:200px;">
+    <input type="number" id="amountInput" placeholder="Məbləğ" style="padding:5px; width:100px;">
+    <button id="addBalanceBtn">Əlavə et</button>
+  </div>
+
+  <h3 style="margin-top:20px;">İstifadəçilər</h3>
+  <table border="1" cellpadding="6" id="userTable" style="width:100%;background:rgba(255,255,255,0.1);color:#fff;border-radius:10px;">
+    <thead><tr><th>UID</th><th>Balans</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<script>
+const LIMIT=75,REWARD=0.0020;
+const BAL_KEY='bal',COUNT_KEY='cnt',RESET_KEY='resetTime',JOIN_KEY='joined';
+
+function safeGet(k,d=0){try{return JSON.parse(localStorage.getItem(k))??d;}catch{return d;}}
+function safeSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){document.cookie=k+"="+encodeURIComponent(v)+";max-age=31536000;path=/";}}
+
+let bal=parseFloat(safeGet(BAL_KEY,0));
+let cnt=parseInt(safeGet(COUNT_KEY,0));
+let resetTime=safeGet(RESET_KEY,null);
+
+function getNextResetTime(){
+  const now=new Date();
+  const reset=new Date();
+  reset.setUTCHours(19,0,0,0); 
+  if(now.getTime()>reset.getTime()) reset.setDate(reset.getDate()+1);
+  return reset.getTime();
+}
+
+if(!resetTime||Date.now()>resetTime){
+  cnt=0;
+  resetTime=getNextResetTime();
+  safeSet(RESET_KEY,resetTime);
+  safeSet(COUNT_KEY,cnt);
+}
+
+function update(){
+  document.getElementById('balance').textContent=bal.toFixed(4);
+  document.getElementById('usd').textContent=(bal*0.59).toFixed(2);
+  document.getElementById('balance2').textContent=bal.toFixed(4);
+  document.getElementById('usd2').textContent=(bal*0.59).toFixed(2);
+  document.getElementById('adsCount').textContent=cnt;
+  document.getElementById('progress').style.width=(cnt/LIMIT*100)+'%';
+  document.getElementById('progressText').textContent=`${cnt}/${LIMIT}`;
+  safeSet(BAL_KEY,bal);safeSet(COUNT_KEY,cnt);
+}
+update();
+
+const adBtn=document.getElementById('adBtn'),msg=document.getElementById('msg');
+adBtn.onclick=()=>{
+  if(cnt>=LIMIT){msg.textContent='📣 Gündəlik limitə çatdınız!';return;}
+  try{if(typeof show_10024800==='function')show_10024800();}catch(e){}
+  adBtn.disabled=true;msg.textContent='İzlənir...';
+  setTimeout(()=>{
+    bal+=REWARD;cnt++;update();
+    msg.textContent='✅ +0.0020 ₼ əlavə olundu!';
+    let s=8;const t=setInterval(()=>{msg.textContent=`⏳ ${s--}s gözləyin`;if(s<0){clearInterval(t);adBtn.disabled=false;msg.textContent='';}},1000);
+  },2500);
 };
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
-// 🧠 Telegram məlumatlarını al
-const tg = window.Telegram?.WebApp;
-tg?.expand();
-
-let userId = localStorage.getItem("userId");
-let userName = "İstifadəçi";
-let invitedBy = "";
-
-// Telegramdan gələn UID və start_param
-try {
-  const user = tg?.initDataUnsafe?.user;
-  if (user?.id) {
-    userId = user.id.toString();
-    userName = user.first_name;
-    localStorage.setItem("userId", userId);
-  }
-  if (tg?.initDataUnsafe?.start_param) {
-    invitedBy = tg.initDataUnsafe.start_param;
-    localStorage.setItem("invitedBy", invitedBy);
-  }
-} catch(e) {
-  console.log("Telegram məlumatı tapılmadı:", e);
-}
-
-// Əgər localStorage-da varsa, ordan götür
-invitedBy = invitedBy || localStorage.getItem("invitedBy") || "";
-
-if (!userId) {
-  userId = Math.floor(Math.random() * 1000000000).toString();
-  localStorage.setItem("userId", userId);
-}
-
-const refLink = `https://t.me/reklampaybot?startapp=${userId}`;
-const refEl = document.getElementById("refLink");
-refEl.textContent = refLink;
-refEl.onclick = () => {
-  navigator.clipboard.writeText(refLink);
-  alert("📋 Referans linkiniz kopyalandı!");
+const joinBtn=document.getElementById('joinBtn');
+if(localStorage.getItem(JOIN_KEY)){joinBtn.textContent='✅ Bonus alındı!';joinBtn.disabled=true;}
+joinBtn.onclick=()=>{
+  if(localStorage.getItem(JOIN_KEY))return;
+  bal+=0.05;safeSet(BAL_KEY,bal);localStorage.setItem(JOIN_KEY,'1');
+  joinBtn.textContent='✅ Bonus alındı!';joinBtn.disabled=true;
+  window.open('https://t.me/qazancazicmasi','_blank');
+  update();
 };
 
-// 🧩 Firebasedə qeydiyyat və bonus
-async function initUser() {
-  const userRef = doc(db, "users", userId);
-  const snap = await getDoc(userRef);
+const methods=document.querySelectorAll('.method');
+const form=document.getElementById('form');const details=document.getElementById('details');
+const amount=document.getElementById('amount');const alertBox=document.getElementById('alert');
+let type='';
+const min={m10:3,azercell:3,bakcell:3,nar:3,bank:3,usdt:17};
+const ph={m10:'10 rəqəmli nömrə',azercell:'050xxxxxxx',bakcell:'055xxxxxxx',nar:'070xxxxxxx',bank:'16 rəqəmli kart nömrəsi',usdt:'TON adresi'};
+methods.forEach(m=>m.onclick=()=>{type=m.dataset.type;document.getElementById('methods').style.display='none';form.style.display='block';details.placeholder=ph[type];});
+document.getElementById('backBtn').onclick=()=>{form.style.display='none';document.getElementById('methods').style.display='grid';};
+document.getElementById('withdrawBtn').onclick=()=>{
+  const det=details.value.trim();const amt=parseFloat(amount.value);
+  alertBox.style.display='none';
+  if(!type){showErr('Metod seçin');return;}
+  if(!det){showErr('Detalları daxil edin');return;}
+  if(isNaN(amt)||amt<=0){showErr('Məbləği düzgün daxil edin');return;}
+  if(amt<min[type]){showErr(`Minimum məbləğ ${min[type]} AZN`);return;}
+  if(amt>bal){showErr('Balans kifayət etmir');return;}
+  bal-=amt;safeSet(BAL_KEY,bal);update();
+  alertBox.textContent='✅ Çıxarış göndərildi!';alertBox.className='alert success';alertBox.style.display='block';
+  setTimeout(()=>{form.style.display='none';document.getElementById('methods').style.display='grid';},1500);
+};
+function showErr(t){alertBox.textContent=t;alertBox.className='alert error';alertBox.style.display='block';}
 
-  // Yeni istifadəçi əlavə et
-  if (!snap.exists()) {
-    await setDoc(userRef, {
-      balance: 0,
-      referral_count: 0,
-      invited_by: invitedBy
-    });
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
 
-    // Əgər bu istifadəçi kiminsə linkindən gəlibsə
-    if (invitedBy && invitedBy !== userId) {
-      const inviterRef = doc(db, "users", invitedBy);
-      await updateDoc(inviterRef, {
-        referral_count: increment(1),
-        balance: increment(0.1)
-      }).catch(() => {});
-    }
-  }
-
-  // Məlumatı göstər
-  const userData = (await getDoc(userRef)).data();
-  document.getElementById("balance").textContent = `${userData.balance.toFixed(4)} ₼`;
-  document.getElementById("refCount").textContent = userData.referral_count;
-}
-
-initUser();
-</script>
-</body>
-</html>
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.add
